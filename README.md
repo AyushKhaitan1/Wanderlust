@@ -137,17 +137,6 @@ Open your browser and navigate to:
 
 ---
 
-## 🔑 Demo Credentials
-
-| Role | Username | Password | Permissions |
-| :--- | :--- | :--- | :--- |
-| **Admin / Host** | `wanderlust_admin` | `admin123` | Full access; owner of all seed listings (can Edit & Delete) |
-| **Traveler** | `alice_travels` | `traveler123` | Author of sample reviews; can create stays and reviews |
-
-*Or register your own user account instantly via the **Sign up** button.*
-
----
-
 ## 🛣️ API & Route Endpoints
 
 | Method | Endpoint | Description | Access |
@@ -167,5 +156,3 @@ Open your browser and navigate to:
 
 ---
 
-## 📜 License
-This project was developed as part of the Apna College Delta Full-Stack Web Development curriculum and is open source under the [ISC License](LICENSE).
