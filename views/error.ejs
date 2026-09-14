@@ -1,0 +1,16 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="row mt-5">
+  <div class="col-md-8 offset-md-2 text-center py-5">
+    <div class="mb-4">
+      <i class="fa-solid fa-triangle-exclamation text-danger display-1"></i>
+    </div>
+    <h2 class="alert-heading fw-bold mb-3"><%= message || "Something went wrong!" %></h2>
+    <p class="text-muted mb-4">
+      The page you were looking for could not be loaded or an unexpected error occurred.
+    </p>
+    <a href="/listings" class="btn btn-airbnb px-4 py-2">
+      <i class="fa-solid fa-arrow-left me-2"></i>Back to Explore
+    </a>
+  </div>
+</div>

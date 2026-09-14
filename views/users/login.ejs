@@ -1,0 +1,50 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="row mt-4 mb-5">
+  <div class="col-12 col-sm-10 col-md-8 col-lg-5 mx-auto">
+    <div class="card shadow-sm border-0 rounded-4 p-4 p-sm-5">
+      <div class="text-center mb-4">
+        <i class="fa-regular fa-compass fa-3x text-danger mb-2"></i>
+        <h2 class="fw-bold">Welcome back</h2>
+        <p class="text-muted small">Log in to manage your listings and reviews</p>
+      </div>
+
+      <form action="/login" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="username" class="form-label fw-semibold">Username</label>
+          <input
+            name="username"
+            id="username"
+            type="text"
+            class="form-control rounded-3 py-2"
+            placeholder="Enter your username"
+            required
+          />
+          <div class="invalid-feedback">Please enter your username.</div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <input
+            name="password"
+            id="password"
+            type="password"
+            class="form-control rounded-3 py-2"
+            placeholder="Enter your password"
+            required
+          />
+          <div class="invalid-feedback">Please enter your password.</div>
+        </div>
+
+        <button class="btn btn-airbnb w-100 py-2 fs-6 rounded-3">
+          Log In
+        </button>
+      </form>
+
+      <div class="text-center mt-4 pt-3 border-top">
+        <span class="text-muted">Don't have an account yet? </span>
+        <a href="/signup" class="fw-bold text-decoration-none text-danger">Sign up</a>
+      </div>
+    </div>
+  </div>
+</div>

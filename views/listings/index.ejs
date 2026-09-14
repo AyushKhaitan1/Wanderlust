@@ -1,0 +1,147 @@
+<% layout("layouts/boilerplate") %>
+
+<!-- Category Filters Carousel Bar with Left & Right Arrows -->
+<div class="filters-wrapper">
+  <button class="filter-scroll-btn d-none d-md-flex" id="scrollLeftBtn" title="Scroll left" aria-label="Scroll left">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <div id="filters">
+    <a href="/listings" class="filter <%= !selectedCategory ? 'active' : '' %>">
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </a>
+    <a href="/listings?category=rooms" class="filter <%= selectedCategory === 'rooms' ? 'active' : '' %>">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </a>
+    <a href="/listings?category=iconic cities" class="filter <%= selectedCategory === 'iconic cities' ? 'active' : '' %>">
+      <i class="fa-solid fa-mountain-city"></i>
+      <p>Iconic Cities</p>
+    </a>
+    <a href="/listings?category=mountains" class="filter <%= selectedCategory === 'mountains' ? 'active' : '' %>">
+      <i class="fa-solid fa-mountain"></i>
+      <p>Mountains</p>
+    </a>
+    <a href="/listings?category=castles" class="filter <%= selectedCategory === 'castles' ? 'active' : '' %>">
+      <i class="fa-brands fa-fort-awesome"></i>
+      <p>Castles</p>
+    </a>
+    <a href="/listings?category=pools" class="filter <%= selectedCategory === 'pools' ? 'active' : '' %>">
+      <i class="fa-solid fa-person-swimming"></i>
+      <p>Amazing Pools</p>
+    </a>
+    <a href="/listings?category=camping" class="filter <%= selectedCategory === 'camping' ? 'active' : '' %>">
+      <i class="fa-solid fa-campground"></i>
+      <p>Camping</p>
+    </a>
+    <a href="/listings?category=farms" class="filter <%= selectedCategory === 'farms' ? 'active' : '' %>">
+      <i class="fa-solid fa-cow"></i>
+      <p>Farms</p>
+    </a>
+    <a href="/listings?category=arctic" class="filter <%= selectedCategory === 'arctic' ? 'active' : '' %>">
+      <i class="fa-regular fa-snowflake"></i>
+      <p>Arctic</p>
+    </a>
+    <a href="/listings?category=domes" class="filter <%= selectedCategory === 'domes' ? 'active' : '' %>">
+      <i class="fa-solid fa-igloo"></i>
+      <p>Domes</p>
+    </a>
+    <a href="/listings?category=boats" class="filter <%= selectedCategory === 'boats' ? 'active' : '' %>">
+      <i class="fa-solid fa-ship"></i>
+      <p>Boats</p>
+    </a>
+  </div>
+
+  <button class="filter-scroll-btn d-none d-md-flex" id="scrollRightBtn" title="Scroll right" aria-label="Scroll right">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+  <!-- Non-colliding Clean Tax Toggle Switch -->
+  <div class="tax-toggle">
+    <div class="form-switch d-flex align-items-center gap-2 mb-0">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+      <label class="form-check-label" for="flexSwitchCheckDefault">Display taxes (18% GST)</label>
+    </div>
+  </div>
+</div>
+
+<% if (searchQuery) { %>
+  <div class="d-flex align-items-center justify-content-between mb-4 bg-body-secondary p-3 rounded-4">
+    <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-magnifying-glass text-danger"></i>
+      <span class="fw-semibold">Showing results for "<span class="text-danger fw-bold"><%= searchQuery %></span>"</span>
+    </div>
+    <a href="/listings" class="btn btn-sm btn-outline-dark rounded-pill px-3">
+      <i class="fa-solid fa-xmark me-1"></i>Clear
+    </a>
+  </div>
+<% } %>
+
+<% if (!allListings || allListings.length === 0) { %>
+  <div class="card text-center py-5 my-5 border-0 shadow-sm rounded-4">
+    <div class="card-body py-4">
+      <i class="fa-solid fa-magnifying-glass-location fa-3x text-danger mb-3"></i>
+      <h3 class="fw-bold">No stays found</h3>
+      <p class="text-muted">Try changing your search terms or picking another category.</p>
+      <a href="/listings" class="btn btn-airbnb mt-2 rounded-pill px-4">Browse All Listings</a>
+    </div>
+  </div>
+<% } else { %>
+  <div class="row row-cols-xxl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+    <% for(let listing of allListings) { %>
+      <div class="col">
+        <div class="card listing-card h-100">
+          <div class="card-img-wrapper">
+            <!-- Favorite / Wishlist Heart Button -->
+            <button
+              class="wishlist-btn"
+              data-id="<%= listing._id %>"
+              data-title="<%= listing.title %>"
+              title="Save to Wishlist"
+              aria-label="Save to Wishlist"
+            >
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <!-- Category Badge -->
+            <span class="category-badge">
+              <%= listing.category || 'Trending' %>
+            </span>
+
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+              <img
+                src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1625505826533-5c80aca7d157?auto=format&fit=crop&w=800&q=60' %>"
+                class="card-img-top"
+                alt="<%= listing.title %>"
+                loading="lazy"
+              />
+            </a>
+          </div>
+
+          <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <p class="card-text mb-0 text-truncate" style="max-width: 80%;">
+                  <b><%= listing.title %></b>
+                </p>
+                <div class="d-flex align-items-center gap-1 small fw-bold">
+                  <i class="fa-solid fa-star text-warning"></i>
+                  <span><%= (4.6 + ((listing.price % 4) / 10)).toFixed(1) %></span>
+                </div>
+              </div>
+              <p class="card-location mb-1">
+                <%= listing.location %>, <%= listing.country %>
+              </p>
+              <p class="card-price mb-0">
+                &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : 0 %>
+                <span class="fw-normal text-muted small">/ night</span>
+                <span class="tax-info">&nbsp;+18% GST (Total &#8377; <%= listing.price ? Math.round(listing.price * 1.18).toLocaleString("en-IN") : 0 %>)</span>
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+<% } %>

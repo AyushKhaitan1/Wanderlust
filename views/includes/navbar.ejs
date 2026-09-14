@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-md sticky-top">
+  <div class="container-fluid px-md-3">
+    <!-- Brand Logo (Single Compass Icon) -->
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-regular fa-compass"></i>
+      <span>wanderlust</span>
+    </a>
+
+    <!-- Theme Toggle on Mobile -->
+    <div class="d-flex align-items-center gap-2 d-md-none ms-auto me-2">
+      <button class="theme-toggle-btn" id="themeToggleBtnMobile" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+
+    <button
+      class="navbar-toggler border-0 shadow-none p-1"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa-solid fa-bars fs-4 text-secondary"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav me-auto">
+        <!-- Clean Explore Link (No duplicate compass icon) -->
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+
+      <!-- Search Bar -->
+      <form class="d-flex my-2 my-md-0 mx-auto" role="search" action="/listings" method="GET" style="max-width: 480px; width: 100%;">
+        <div class="input-group">
+          <input
+            class="form-control search-inp"
+            type="search"
+            name="search"
+            placeholder="Search destinations, villas, countries..."
+            value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+            aria-label="Search"
+          />
+          <button class="btn search-btn ms-2" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span class="d-none d-lg-inline">Search</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="navbar-nav ms-auto align-items-center gap-2">
+        <a class="nav-link text-nowrap" href="/listings/new">
+          Airbnb your home
+        </a>
+
+        <!-- Dark/Light Mode Toggle Button (Desktop) -->
+        <button class="theme-toggle-btn d-none d-md-flex" id="themeToggleBtn" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <% if (!currUser) { %>
+          <a class="nav-link fw-semibold text-danger" href="/signup">Sign up</a>
+          <a class="nav-link fw-semibold" href="/login">Log in</a>
+        <% } else { %>
+          <div class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle d-flex align-items-center gap-2 py-1 px-3 rounded-pill border"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fa-solid fa-circle-user fs-5 text-secondary"></i>
+              <span class="fw-semibold"><%= currUser.username %></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg rounded-4 p-2 mt-2" style="min-width: 220px;">
+              <li>
+                <div class="dropdown-item-text py-2 px-3">
+                  <small class="text-muted d-block">Signed in as</small>
+                  <div class="fw-bold fs-6"><%= currUser.name || currUser.username %></div>
+                  <small class="text-muted"><%= currUser.email %></small>
+                </div>
+              </li>
+              <li><hr class="dropdown-divider my-1" /></li>
+              <li>
+                <a class="dropdown-item rounded-3 py-2" href="/profile">
+                  <i class="fa-solid fa-suitcase-rolling me-2 text-success"></i>My Bookings
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item rounded-3 py-2" href="/profile?tab=wishlist">
+                  <i class="fa-solid fa-heart me-2 text-danger"></i>My Wishlist
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item rounded-3 py-2" href="/profile?tab=hosted">
+                  <i class="fa-solid fa-house-chimney me-2 text-primary"></i>My Hosted Stays
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item rounded-3 py-2" href="/listings/new">
+                  <i class="fa-solid fa-plus me-2 text-danger"></i>Host a New Place
+                </a>
+              </li>
+              <li><hr class="dropdown-divider my-1" /></li>
+              <li>
+                <a class="dropdown-item text-danger rounded-3 py-2" href="/logout">
+                  <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log out
+                </a>
+              </li>
+            </ul>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
